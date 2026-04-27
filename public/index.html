@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battle Royle MVP</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="authScreen" class="panel">
+      <h1>Battle Royle MVP</h1>
+      <p class="muted">Register or login to play multiplayer battle royale.</p>
+      <div class="row">
+        <input id="usernameInput" placeholder="Username" maxlength="20" />
+        <input id="passwordInput" type="password" placeholder="Password" maxlength="50" />
+      </div>
+      <div class="row buttons">
+        <button id="registerBtn">Register</button>
+        <button id="loginBtn">Login</button>
+      </div>
+      <p id="authMessage" class="status"></p>
+    </section>
+
+    <section id="menuScreen" class="panel hidden">
+      <h2>Main Menu</h2>
+      <p id="welcomeText"></p>
+      <div class="stats" id="statBlock"></div>
+      <div class="row">
+        <select id="createMapSelect">
+          <option value="forest">Forest Camp</option>
+          <option value="desert">Desert Outpost</option>
+          <option value="urban">Urban Ruins</option>
+        </select>
+        <button id="createRoomBtn">Create Room</button>
+      </div>
+      <div class="row">
+        <input id="roomCodeInput" placeholder="Room Code" maxlength="8" />
+        <button id="joinRoomBtn">Join Room</button>
+      </div>
+      <button id="logoutBtn" class="ghost">Logout</button>
+      <p id="menuMessage" class="status"></p>
+    </section>
+
+    <section id="lobbyScreen" class="panel hidden">
+      <h2>Lobby</h2>
+      <p><strong>Room Code:</strong> <span id="lobbyCode">----</span></p>
+      <p><strong>Map:</strong> <span id="lobbyMap">Forest Camp</span></p>
+      <p><strong>Players:</strong> <span id="lobbyCount">0</span>/16 | <strong>Bot Fill:</strong> <span id="lobbyBots">0</span></p>
+      <div class="row">
+        <select id="lobbyMapSelect">
+          <option value="forest">Forest Camp</option>
+          <option value="desert">Desert Outpost</option>
+          <option value="urban">Urban Ruins</option>
+        </select>
+        <button id="setMapBtn">Set Map (Host)</button>
+      </div>
+      <button id="startGameBtn">Start Game (Host)</button>
+      <h3>Joined Players</h3>
+      <ul id="lobbyPlayers"></ul>
+      <button id="leaveLobbyBtn" class="ghost">Back to Menu</button>
+      <p id="lobbyMessage" class="status"></p>
+    </section>
+
+    <section id="gameScreen" class="hidden">
+      <canvas id="gameCanvas" width="1280" height="720"></canvas>
+      <div id="hud">
+        <div id="leftHud">
+          <div>HP: <span id="hudHp">100</span></div>
+          <div>Armor: <span id="hudArmor">0</span></div>
+          <div>Weapon: <span id="hudWeapon">Pistol</span></div>
+          <div>Ammo: <span id="hudAmmo">12 / 40</span></div>
+        </div>
+        <div id="centerHud">
+          <div>Kills: <span id="hudKills">0</span></div>
+          <div>Remaining: <span id="hudRemaining">16</span></div>
+          <div>Safe Zone: <span id="hudZone">--</span></div>
+        </div>
+        <div id="rightHud">
+          <button id="pickupBtn">Pickup (E)</button>
+          <button id="reloadBtn">Reload (R)</button>
+        </div>
+      </div>
+      <div id="mobileControls" class="hidden">
+        <div id="moveStick" class="stick">Move</div>
+        <div id="aimStick" class="stick">Aim/Shoot</div>
+      </div>
+    </section>
+
+    <section id="endScreen" class="panel hidden">
+      <h2>Match Ended</h2>
+      <p id="endWinner">Winner: -</p>
+      <h3>Results</h3>
+      <ul id="endResults"></ul>
+      <button id="endBackBtn">Back to Lobby</button>
+    </section>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/client.js"></script>
+</body>
+</html>
